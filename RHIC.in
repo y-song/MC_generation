@@ -1,0 +1,48 @@
+read snippets/PPCollider.in
+cd /Herwig/Generators
+# Intrinsic pT tune extrapolated to LHC energy
+set /Herwig/Shower/ShowerHandler:IntrinsicPtGaussian 2.2*GeV
+set EventGenerator:EventHandler:LuminosityFunction:Energy 200.0
+# Declare stable particles 
+cd /Herwig/Particles 
+set mu-:Stable Stable 
+set mu+:Stable Stable
+ 
+# Settings for wDECAY: turn off all the set stable code below
+# Settings for 1208: set the following particles to stable
+set Sigma-:Stable Stable 
+set Sigmabar+:Stable Stable 
+set Lambda0:Stable Stable 
+set Lambdabar0:Stable Stable 
+set Sigma+:Stable Stable 
+set Sigmabar-:Stable Stable 
+set Xi-:Stable Stable 
+set Xibar+:Stable Stable 
+set Xi0:Stable Stable 
+set Xibar0:Stable Stable 
+set Omega-:Stable Stable 
+set Omegabar+:Stable Stable 
+set pi+:Stable Stable 
+set pi-:Stable Stable 
+set K+:Stable Stable 
+set K-:Stable Stable 
+set K_S0:Stable Stable 
+set K_L0:Stable Stable 
+# Settings for least decay: in addition to having stable particles for 1208, also set the following to stable
+set pi0:Stable Stable
+set eta:Stable Stable
+set Sigma0:Stable Stable
+set Sigmabar0:Stable Stable
+cd /Herwig/MatrixElements/
+# QCD 2-2 scattering
+insert SubProcess:MatrixElements[0] MEQCD2to2
+cd /Herwig/Cuts/
+set JetKtCut:MinKT 11*GeV
+set JetKtCut:MaxKT 15*GeV
+# for HepMC Output 
+insert /Herwig/Generators/EventGenerator:AnalysisHandlers[0] /Herwig/Analysis/HepMCFile
+set /Herwig/Analysis/HepMCFile:PrintEvent 10000000
+set /Herwig/Analysis/HepMCFile:Format GenEvent
+set /Herwig/Analysis/HepMCFile:Units GeV_mm
+cd /Herwig/Generators
+saverun HERWIG_200GeV EventGenerator
