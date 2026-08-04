@@ -1,6 +1,6 @@
 # Existing hepmc files
 - Pythia 8.303
-    - Location on bouchet: `/nfs/roberts/project/pi_im375/ys668/from_raghav/pythia/`
+    - Location on bouchet: `/nfs/roberts/project/pi_im375/ys668/from_rithya/pythia/`
     - Number of events: 200,000 per pTHat bin
     - Settings:
         - `PYTHIA8_*pthat*_200GeV.hepmc` are generated with `main42.cc` and `PYTHIA8_200GeV_STAR.cmnd`
@@ -12,7 +12,7 @@
     - Settings:
         -  `HERWIG_*pthat*_200GeV(-S111111).hepmc` are generated with `RHIC.in`
 - Herwig 7.2 alternative settings
-    - Location on bouchet: `/nfs/roberts/project/pi_im375/ys668/from_raghav/herwig/`
+    - Location on bouchet: `/nfs/roberts/project/pi_im375/ys668/from_rithya/herwig/`
     - Number of events: 200,000 per pTHat bin
     - Settings:
         - `HERWIG_*pthat*_200GeV_STABLE_RESONANCE-S111111.hepmc` are generated with `RHIC_STABLE_RESONANCE.in`
