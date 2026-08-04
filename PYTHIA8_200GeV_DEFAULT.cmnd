@@ -1,0 +1,54 @@
+! File: main42.cmnd
+! This file contains commands to be read in for a Pythia8 run.
+! Lines not beginning with a letter or digit are comments.
+! Names are case-insensitive  -  but spellings-sensitive!
+! The changes here are illustrative, not always physics-motivated.
+
+! 1) Settings that will be used in a main program.
+Main:numberOfEvents = NEVT         ! number of events to generate
+! Main:timesAllowErrors = 3          ! abort run after this many flawed events
+
+! 2) Settings related to output in init(), next() and stat().
+Init:showChangedSettings = on      ! list changed settings
+Init:showAllSettings = off         ! list all settings
+Init:showChangedParticleData = on  ! list changed particle data
+#Init:showAllParticleData = off     ! list all particle data
+Next:numberCount = 10000            ! print message every n events
+#Next:numberShowLHA = 1             ! print LHA information n times
+#Next:numberShowInfo = 1            ! print event information n times
+#Next:numberShowProcess = 1         ! print process record n times
+#Next:numberShowEvent = 1           ! print event record n times
+Stat:showPartonLevel = on          ! additional statistics on MPI
+
+! 3) Beam parameter settings. Values below agree with default ones.
+Beams:idA = 2212                   ! first beam, p = 2212, pbar = -2212
+Beams:idB = 2212                   ! second beam, p = 2212, pbar = -2212
+Beams:eCM = 200.                   ! CM energy of collision
+
+! 5a) Pick processes and kinematics cuts.
+HardQCD:all = on
+PhaseSpace:pTHatMin = PTMIN       ! low pthat cut
+PhaseSpace:pTHatMax = PTMAX       ! high pthat cut
+
+! 6) Other settings. Can be expanded as desired.
+! Note: may overwrite some of the values above, so watch out.
+PartonLevel:MPI = on
+PartonLevel:ISR = on
+PartonLevel:FSR = on
+! master switch for hadronization
+HadronLevel:all = on
+
+! 7) Choose parton shower model. 
+! Warning: Dire comes with weighted events.
+PartonShowers:model = 1    ! 1:old showers, 2:vincia, 3:dire
+
+! 8) Default tune
+PDF:pSet = 13
+MultipartonInteractions:ecmRef = 7000
+MultipartonInteractions:bProfile = 3
+MultipartonInteractions:pT0Ref = 2.28
+! MultipartonInteractions:expPow = 1.436113
+MultipartonInteractions:ecmPow = 0.215
+MultipartonInteractions:coreRadius = 0.4
+MultipartonInteractions:coreFraction = 0.5
+ColourReconnection:range = 1.8 

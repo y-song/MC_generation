@@ -1,0 +1,2 @@
+g++ main42.cc -o main42 -I/usr/local/include -I/usr/local/include -O2 -std=c++11 -pedantic -W -Wall -Wshadow -fPIC  -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lpythia8 -ldl -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lHepMC
+g++ main42_stable_resonance.cc -o main42_stable_resonance -I/usr/local/include -I/usr/local/include -O2 -std=c++11 -pedantic -W -Wall -Wshadow -fPIC  -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lpythia8 -ldl -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lHepMC 

@@ -1,6 +1,6 @@
 # What needs to be done
 1. Generate more Detroit tune pythia events (1,000,000) in 11-15 GeV pTHat bin
-- I will have the settings set in `main42.cc` and `PYTHIA8_200GeV_STAR.cmnd`. Then we need to run `./compilepythiacode.sh` and `./main42 <cmnd_file>.cmnd`.
+- Run `./compilepythiacode.sh` and then `./main42 PYTHIA8_200GeV_STAR.cmnd`.
 2. Run rivet analysis on the newly generated hepmc file
 - Run `rivet-build RivetPYTHIA_JETS_RC_TRUTH.so PYTHIA_JETS_RC_TRUTH.cc` and `rivet -a PYTHIA_JETS_RC_TRUTH --pwd <hepmc_file>.hepmc`. May need to rename the output text file to avoid it being overriden by later steps
 3. Run rivet analysis over existing hepmc files from other pTHat bins
@@ -10,13 +10,10 @@
 ## Event generation
 ### Pythia
 - `main42.cc` specifies particle decay settings
-    - To do: Copy `main42.cc` over
 - `*.cmnd` specifies number of events, pTHat bins, output hepmc name, and pythia tune
     - `PYTHIA8_200GeV_STAR.cmnd` is for Detroit tune
     - `PYTHIA8_200GeV_DEFAULT.cmnd` is for default tune
-        - To do: Copy `*.cmnd` over
 1. Compile: `./compilepythiacode.sh`
-    - To do: Copy `compilepythiacode.sh` over
 2. Run: `./main42 <cmnd_file>.cmnd`. This generates pythia events and saves them as hepmc files
 
 ### Herwig
