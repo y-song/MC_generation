@@ -1,3 +1,23 @@
+# Existing hepmc files
+- Pythia 8.303
+    - Location on bouchet: `/nfs/roberts/project/pi_im375/ys668/from_raghav/pythia/`
+    - Number of events: 200,000 per pTHat bin
+    - Settings:
+        - `PYTHIA8_*pthat*_200GeV.hepmc` are generated with `main42.cc` and `PYTHIA8_200GeV_STAR.cmnd`
+        - `PYTHIA8_*pthat*_200GeV_DEFAULT.hepmc` are generated with `main42.cc` and `PYTHIA8_200GeV_DEFAULT.cmnd`
+        - `PYTHIA8_*pthat*_200GeV_STABLE_RESONANCE.hepmc` are generated with `main42_stable_resonance.cc` and `PYTHIA8_200GeV_DEFAULT.cmnd` (I think these are with the default tune? not sure, need to check)
+- Herwig 7.2 default setting
+    - Location on bouchet: `/nfs/roberts/project/pi_lbh35/shared/sim_youqi/HERWIG7.2/`
+    - Number of events: 1,000,000 per pTHat bin (for pTHat > 10 GeV), 1,500,000 per pTHat bin (for 5 < pTHat < 10 GeV)
+    - Settings:
+        -  `HERWIG_*pthat*_200GeV(-S111111).hepmc` are generated with `RHIC.in`
+- Herwig 7.2 alternative settings
+    - Location on bouchet: `/nfs/roberts/project/pi_im375/ys668/from_raghav/herwig/`
+    - Number of events: 200,000 per pTHat bin
+    - Settings:
+        - `HERWIG_*pthat*_200GeV_STABLE_RESONANCE-S111111.hepmc` are generated with `RHIC_STABLE_RESONANCE.in`
+        - `HERWIG_*pthat*_200GeV_P8I-S111111.hepmc` (I think I lost the config file, but could reproduce it following instructions from email exchange with Rithya)
+
 # What needs to be done
 1. Generate more Detroit tune pythia events (1,000,000) in 11-15 GeV pTHat bin
 - Run `./compilepythiacode.sh` and then `./main42 PYTHIA8_200GeV_STAR.cmnd`.
