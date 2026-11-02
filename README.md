@@ -1,30 +1,23 @@
 # Existing hepmc files
 - Pythia 8.303
-    - Location on bouchet: `/nfs/roberts/project/pi_im375/ys668/from_rithya/pythia/`
-    - Number of events: 200,000 per pTHat bin
+    - Location on Perlmutter: `/global/cfs/projectdirs/alice/alicepro/hiccup/rstorage/alice/AnalysisResults/youqi/from_bouchet/from_rithya/pythia/`
+    - Number of events: 200,000 per pTHat bin (unless otherwise specified)
     - Settings:
-        - `PYTHIA8_*pthat*_200GeV.hepmc` are generated with `main42.cc` and `PYTHIA8_200GeV_STAR.cmnd`
-        - `PYTHIA8_*pthat*_200GeV_DEFAULT.hepmc` are generated with `main42.cc` and `PYTHIA8_200GeV_DEFAULT.cmnd`
-        - `PYTHIA8_*pthat*_200GeV_STABLE_RESONANCE.hepmc` are generated with `main42_stable_resonance.cc` and `PYTHIA8_200GeV_DEFAULT.cmnd` (I think these are with the default tune? not sure, need to check)
+        - `PYTHIA8_*pthat*_200GeV.hepmc` (15 < pTHat < 1000 GeV) and `PYTHIA8_11pthat15_200GeV_STAR.hepmc` (1,000,000 events) are generated with `main42.cc` and `PYTHIA8_200GeV_STAR.cmnd`
+        - `PYTHIA8_*pthat*_200GeV_DEFAULT.hepmc` are generated with `main42.cc` and `PYTHIA8_200GeV_DEFAULT.cmnd`. The `11pthat15` file has 1,000,000 events.
+        - `PYTHIA8_*pthat*_200GeV_STAR_STABLE_RESONANCE.hepmc` are generated with `main42_stable_resonance.cc` and `PYTHIA8_200GeV_STAR.cmnd`. The `11pthat15` file has 1,000,000 events.
+        - `PYTHIA8_*pthat*_200GeV_DEFAULT_STABLE_RESONANCE.hepmc` are generated with `main42_stable_resonance.cc` and `PYTHIA8_200GeV_DEFAULT.cmnd`. The `11pthat15` file has 1,000,000 events.
 - Herwig 7.2 default setting
     - Location on bouchet: `/nfs/roberts/project/pi_lbh35/shared/sim_youqi/HERWIG7.2/`
     - Number of events: 1,000,000 per pTHat bin (for pTHat > 10 GeV), 1,500,000 per pTHat bin (for 5 < pTHat < 10 GeV)
     - Settings:
         -  `HERWIG_*pthat*_200GeV(-S111111).hepmc` are generated with `RHIC.in`
 - Herwig 7.2 alternative settings
-    - Location on bouchet: `/nfs/roberts/project/pi_im375/ys668/from_rithya/herwig/`
+    - Location on Perlmutter: `/global/cfs/projectdirs/alice/alicepro/hiccup/rstorage/alice/AnalysisResults/youqi/from_bouchet/from_rithya/herwig/`
     - Number of events: 200,000 per pTHat bin
     - Settings:
         - `HERWIG_*pthat*_200GeV_STABLE_RESONANCE-S111111.hepmc` are generated with `RHIC_STABLE_RESONANCE.in`
         - `HERWIG_*pthat*_200GeV_P8I-S111111.hepmc` (I think I lost the config file, but could reproduce it following instructions from email exchange with Rithya)
-
-# What needs to be done
-1. Generate more Detroit tune pythia events (1,000,000) in 11-15 GeV pTHat bin
-- Run `./compilepythiacode.sh` and then `./main42 PYTHIA8_200GeV_STAR.cmnd PYTHIA8_11pthat15_200GeV_STAR.hepmc`.
-2. Run rivet analysis on the newly generated hepmc file
-- Run `rivet-build RivetPYTHIA_JETS_RC_TRUTH.so PYTHIA_JETS_RC_TRUTH.cc` and `rivet -a PYTHIA_JETS_RC_TRUTH --pwd <hepmc_file>.hepmc`. May need to rename the output text file to avoid it being overriden by later steps
-3. Run rivet analysis over existing hepmc files from other pTHat bins
-- I will need to check that the current settings in `generate_events_and_analyze_pythia.py` match the names of the files to be copied over. Then we can run `python generate_events_and_analyze_pythia.py`
 
 # General info on MC generation
 ## Event generation
@@ -42,6 +35,7 @@
 2. Run: `Herwig run <run_file>.run -s 111111 -N <number_of_events>`
 
 ## Rivet analysis
+- `PYTHIA_JETS_RC_TRUTH.cc` for rc analysis; `PYTHIA_JETS_MULTIFOLD_TRUTH.cc` for MultiFold analysis
 1. Compile: `rivet-build RivetPYTHIA_JETS_RC_TRUTH.so PYTHIA_JETS_RC_TRUTH.cc`
 2. Run: `rivet -a PYTHIA_JETS_RC_TRUTH --pwd <hepmc_file>.hepmc`. This carries out the rivet analysis on hepmc files, saving the analysis results into text files, one row per jet
 
