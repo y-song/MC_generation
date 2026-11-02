@@ -1,4 +1,5 @@
-# Existing hepmc files
+# Existing files
+## Hepmc files
 - Pythia 8.303
     - Location on Perlmutter: `/global/cfs/projectdirs/alice/alicepro/hiccup/rstorage/alice/AnalysisResults/youqi/from_bouchet/from_rithya/pythia/`
     - Number of events: 200,000 per pTHat bin (unless otherwise specified)
@@ -19,6 +20,12 @@
         - `HERWIG_*pthat*_200GeV_STABLE_RESONANCE-S111111.hepmc` are generated with `RHIC_STABLE_RESONANCE.in`
         - `HERWIG_*pthat*_200GeV_P8I-S111111.hepmc` (I think I lost the config file, but could reproduce it following instructions from email exchange with Rithya)
 
+## Jet tree txt files
+- Pythia 8.303 for rc analysis
+    - Location on Bouchet: `/nfs/roberts/pi/pi_lbh35/youqi/detroit_tune/`, `/nfs/roberts/pi/pi_lbh35/youqi/default_tune/`
+- Pythia 8.303 for multifold analysis
+    - Location on Bouchet: `/nfs/roberts/pi/pi_lbh35/youqi/detroit_tune/`
+    
 # General info on MC generation
 ## Event generation
 ### Pythia
