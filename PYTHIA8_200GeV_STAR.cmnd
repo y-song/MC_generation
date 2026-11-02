@@ -5,7 +5,7 @@
 ! The changes here are illustrative, not always physics-motivated.
 
 ! 1) Settings that will be used in a main program.
-Main:numberOfEvents = 1000000         ! number of events to generate
+Main:numberOfEvents = NEVT         ! number of events to generate
 ! Main:timesAllowErrors = 3          ! abort run after this many flawed events
 
 ! 2) Settings related to output in init(), next() and stat().
@@ -27,8 +27,8 @@ Beams:eCM = 200.                   ! CM energy of collision
 
 ! 5a) Pick processes and kinematics cuts.
 HardQCD:all = on
-PhaseSpace:pTHatMin = 11          ! low pthat cut
-PhaseSpace:pTHatMax = 15          ! high pthat cut
+PhaseSpace:pTHatMin = PTMIN          ! low pthat cut
+PhaseSpace:pTHatMax = PTMAX          ! high pthat cut
 
 ! 6) Other settings. Can be expanded as desired.
 ! Note: may overwrite some of the values above, so watch out.

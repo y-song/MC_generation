@@ -60,7 +60,7 @@ namespace Rivet
             const FinalState fs(Cuts::pt > 0.2 && Cuts::abseta < 1.0);
             declare(fs, "fs");
             // open output file
-            mytxtfile.open("pythia_PTMINpthatPTMAX_multifold_truth.txt");
+            mytxtfile.open("herwig_PTMINpthatPTMAX_multifold_truth.txt");
         }
 
         /// Perform the per-event analysis
@@ -115,23 +115,23 @@ namespace Rivet
                 jets[i].set_user_info(new fastjet::MyUserInfo(q, -999));
             }
 
-            // match jets to partons
-            for (HepMC::GenEvent::particle_iterator p = theEvent->particles_begin(); p != theEvent->particles_end(); ++p)
-            {
-                if ((*p)->status() != 23)
-                {
-                    continue;
-                }
-                PseudoJet parton_pseudojet((*p)->momentum().px(), (*p)->momentum().py(), (*p)->momentum().pz(), (*p)->momentum().e());
-                for (unsigned int i = 0; i < jets.size(); i++)
-                {
-                    if (jets[i].delta_R(parton_pseudojet) > 0.4 || jets[i].user_info<fastjet::MyUserInfo>().parton() != -999)
-                        continue;
-                    vector<double> jet_q = jets[i].user_info<fastjet::MyUserInfo>().q();
-                    jets[i].set_user_info(new fastjet::MyUserInfo(jet_q, (*p)->pdg_id()));
-                    break;
-                }
-            }
+            // match jets to partons, comment out for herwig
+            // for (HepMC::GenEvent::particle_iterator p = theEvent->particles_begin(); p != theEvent->particles_end(); ++p)
+            // {
+            //     if ((*p)->status() != 23)
+            //     {
+            //         continue;
+            //     }
+            //     PseudoJet parton_pseudojet((*p)->momentum().px(), (*p)->momentum().py(), (*p)->momentum().pz(), (*p)->momentum().e());
+            //     for (unsigned int i = 0; i < jets.size(); i++)
+            //     {
+            //         if (jets[i].delta_R(parton_pseudojet) > 0.4 || jets[i].user_info<fastjet::MyUserInfo>().parton() != -999)
+            //             continue;
+            //         vector<double> jet_q = jets[i].user_info<fastjet::MyUserInfo>().q();
+            //         jets[i].set_user_info(new fastjet::MyUserInfo(jet_q, (*p)->pdg_id()));
+            //         break;
+            //     }
+            // }
 
             for (unsigned int i = 0; i < jets.size(); i++)
             {

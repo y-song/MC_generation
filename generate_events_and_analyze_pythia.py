@@ -2,7 +2,7 @@ import os
 
 def main():
     kt_ranges = [
-            # {"min_pt": 11, "max_pt": 15},
+            {"min_pt": 11, "max_pt": 15},
             {"min_pt": 15, "max_pt": 20},
             {"min_pt": 20, "max_pt": 25},
             {"min_pt": 25, "max_pt": 30},
@@ -19,7 +19,7 @@ def main():
         r["cmnd_name"] = f"PYTHIA8_200GeV_STAR"
         r["hepmc_name"] = f"PYTHIA8_{r['min_pt']}pthat{r['max_pt']}_200GeV"
 
-    rivet_name = "PYTHIA_JETS_RC_TRUTH"   
+    rivet_name = "PYTHIA_JETS_MULTIFOLD_TRUTH"   
     run_pythia = False
     run_rivet = True
     
@@ -27,7 +27,7 @@ def main():
     
     if (run_pythia):
         
-        os.chdir("/work/gen_events/")
+        # os.chdir("/work/gen_events/")
     
         for r in kt_ranges:
     
@@ -40,11 +40,11 @@ def main():
                 code = code.replace("PTMAX", str(r["max_pt"]))
                 with open("{}_COPY.cmnd".format(r["cmnd_name"]), "w") as ff:
                     ff.write(code)
-                #print(code)
-           
-            pythia_run_command = "./main42 {}_COPY.cmnd {}.hepmc".format(r["cmnd_name"], r["hepmc_name"])
+                           
+            pythia_run_command = "./main42_stable_resonance {}_COPY.cmnd {}.hepmc".format(r["cmnd_name"], r["hepmc_name"])
             os.system(pythia_run_command)
-        
+            os.replace("{}.hepmc".format(r["hepmc_name"]), "../gen_events/{}.hepmc".format(r["hepmc_name"]))
+
     #########################################################################
 
     if (run_rivet):
@@ -53,7 +53,7 @@ def main():
     
         for r in kt_ranges:
 
-        # create .cc files
+            # create .cc files
             os.system("cp {}.cc {}_COPY.cc".format(rivet_name, rivet_name))
             with open("{}_COPY.cc".format(rivet_name), "r") as f:
                 code = f.read()

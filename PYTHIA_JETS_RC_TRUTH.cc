@@ -51,7 +51,7 @@ namespace Rivet
       const FinalState fs(Cuts::pt > 0.2 && Cuts::abseta < 1.0);
       declare(fs, "fs");
       // open output file
-      mytxtfile.open("pythia_PTMINpthatPTMAX_rc_truth.txt");
+      mytxtfile.open("pythia_PTMINpthatPTMAX_detroit_stable_resonance_rc_truth.txt");
     }
 
     /// Perform the per-event analysis
