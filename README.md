@@ -25,7 +25,9 @@
     - Location on Bouchet: `/nfs/roberts/pi/pi_lbh35/youqi/detroit_tune/`, `/nfs/roberts/pi/pi_lbh35/youqi/default_tune/`
 - Pythia 8.303 for multifold analysis
     - Location on Bouchet: `/nfs/roberts/pi/pi_lbh35/youqi/detroit_tune/`
-    
+- Herwig 7.2 for multifold analysis
+    - Location on Bouchet: `/nfs/roberts/pi/pi_lbh35/youqi/herwig/`    
+
 # General info on MC generation
 ## Event generation
 ### Pythia
