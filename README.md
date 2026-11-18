@@ -25,6 +25,8 @@
     - Location on Bouchet: `/nfs/roberts/pi/pi_lbh35/youqi/detroit_tune/`, `/nfs/roberts/pi/pi_lbh35/youqi/default_tune/`
 - Pythia 8.303 for multifold analysis
     - Location on Bouchet: `/nfs/roberts/pi/pi_lbh35/youqi/detroit_tune/`
+- Herwig 7.2 for rc analysis
+    - Location on Bouchet: `/nfs/roberts/pi/pi_lbh35/youqi/herwig/` 
 - Herwig 7.2 for multifold analysis
     - Location on Bouchet: `/nfs/roberts/pi/pi_lbh35/youqi/herwig/`    
 
@@ -47,7 +49,10 @@
 - `PYTHIA_JETS_RC_TRUTH.cc` for rc analysis; `PYTHIA_JETS_MULTIFOLD_TRUTH.cc` for MultiFold analysis
 1. Compile: `rivet-build RivetPYTHIA_JETS_RC_TRUTH.so PYTHIA_JETS_RC_TRUTH.cc`
 2. Run: `rivet -a PYTHIA_JETS_RC_TRUTH --pwd <hepmc_file>.hepmc`. This carries out the rivet analysis on hepmc files, saving the analysis results into text files, one row per jet
+> __Running on Bouchet__  
+> See `bouchet/setup.sh` for setup. Rivet on Bouchet is Rivet4, which is not compatible with HEPMC2. `bouchet/PYTHIA_JETS_RC_TRUTH_HEPMC3.cc` is written with HEPMC3.  
 
 ## Batch process
 - `generate_events_and_analyze_pythia.py` loops over different pTHat settings and does pythia event generation and rivet analysis for each 
     - If hepmc files are previously generated, then we set `run_pythia = False` to skip the generation step.
+- `generate_events_and_analyze_herwig.py` works similarly
