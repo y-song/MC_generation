@@ -63,7 +63,7 @@ namespace Rivet
 
       //===========================================
       // process particles
-      Particles fsParticles = getProjection<FinalState>("fs").particles();
+      const Particles& fsParticles = apply<FinalState>(event, "fs").particles();
       PseudoJets parts;
       for (const Particle &p : fsParticles)
       {
