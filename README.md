@@ -1,9 +1,26 @@
+<!-- vscode-markdown-toc -->
+1. [Existing files](#Existingfiles)
+  * 1.1. [Hepmc files](#Hepmcfiles)
+  * 1.2. [Jet tree txt files](#Jettreetxtfiles)
+2. [Workflow](#Workflow)
+  * 2.1. [Event generation](#Eventgeneration)
+    * 2.1.1. [Pythia](#Pythia)
+    * 2.1.2. [Herwig](#Herwig)
+  * 2.2. [Rivet analysis](#Rivetanalysis)
+  * 2.3. [Batch process](#Batchprocess)
+
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+
 # MC_generation
 This is a repository and documentation for myself. (As I lost access to a few computing clusters since I finished grad school, and had to move files around a few times, I need to keep track of where things are and how to reproduce them).
 
 Unless specified otherwise, code has only been tested to compile and run on Rithya's computer.
-## Existing files
-### Hepmc files
+##  1. <a name='Existingfiles'></a>Existing files
+###  1.1. <a name='Hepmcfiles'></a>Hepmc files
 - Pythia 8.303
     - Location on Perlmutter: `/global/cfs/projectdirs/alice/alicepro/hiccup/rstorage/alice/AnalysisResults/youqi/from_bouchet/from_rithya/pythia/`
     - Number of events: 200,000 per pTHat bin (unless otherwise specified)
@@ -24,7 +41,7 @@ Unless specified otherwise, code has only been tested to compile and run on Rith
         - `HERWIG_*pthat*_200GeV_STABLE_RESONANCE-S111111.hepmc` are generated with `RHIC_STABLE_RESONANCE.in`
         - `HERWIG_*pthat*_200GeV_P8I-S111111.hepmc` (I think I lost the config file, but could reproduce it following instructions from email exchange with Rithya)
 
-### Jet tree txt files
+###  1.2. <a name='Jettreetxtfiles'></a>Jet tree txt files
 - Pythia 8.303 for rc analysis
     - Location on Bouchet: `/nfs/roberts/pi/pi_lbh35/youqi/detroit_tune/`, `/nfs/roberts/pi/pi_lbh35/youqi/default_tune/`
 - Pythia 8.303 for multifold analysis
@@ -34,9 +51,9 @@ Unless specified otherwise, code has only been tested to compile and run on Rith
 - Herwig 7.2 for multifold analysis
     - Location on Bouchet: `/nfs/roberts/pi/pi_lbh35/youqi/herwig/`    
 
-## Workflow
-### Event generation
-#### Pythia
+##  2. <a name='Workflow'></a>Workflow
+###  2.1. <a name='Eventgeneration'></a>Event generation
+####  2.1.1. <a name='Pythia'></a>Pythia
 - `main42.cc` specifies particle decay settings
 - `*.cmnd` specifies number of events, pTHat bins, output hepmc name, and pythia tune
     - `PYTHIA8_200GeV_STAR.cmnd` is for Detroit tune
@@ -44,19 +61,19 @@ Unless specified otherwise, code has only been tested to compile and run on Rith
 1. Compile: `./compilepythiacode.sh`
 2. Run: `./main42 <cmnd_file>.cmnd <output_file>.hepmc`. This generates pythia events and saves them as hepmc files
 
-#### Herwig
+####  2.1.2. <a name='Herwig'></a>Herwig
 - `RHIC.in` specifies all the settings
 1. Read in the configuration: `Herwig read RHIC.in`. This creates a new file `<run_file>.run`
 2. Run: `Herwig run <run_file>.run -s 111111 -N <number_of_events>`
 
-### Rivet analysis
+###  2.2. <a name='Rivetanalysis'></a>Rivet analysis
 - `PYTHIA_JETS_RC_TRUTH.cc` for rc analysis; `PYTHIA_JETS_MULTIFOLD_TRUTH.cc` for MultiFold analysis
 1. Compile: `rivet-build RivetPYTHIA_JETS_RC_TRUTH.so PYTHIA_JETS_RC_TRUTH.cc`
 2. Run: `rivet -a PYTHIA_JETS_RC_TRUTH --pwd <hepmc_file>.hepmc`. This carries out the rivet analysis on hepmc files, saving the analysis results into text files, one row per jet
 > __Running on Bouchet__  
 > See `bouchet/setup.sh` for setup. Rivet on Bouchet is Rivet4, which is not compatible with HEPMC2. `bouchet/PYTHIA_JETS_RC_TRUTH_HEPMC3.cc` is written with HEPMC3.  
 
-### Batch process
+###  2.3. <a name='Batchprocess'></a>Batch process
 - `generate_events_and_analyze_pythia.py` loops over different pTHat settings and does pythia event generation and rivet analysis for each 
     - If hepmc files are previously generated, then we set `run_pythia = False` to skip the generation step.
 - `generate_events_and_analyze_herwig.py` works similarly
